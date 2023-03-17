@@ -118,6 +118,8 @@
     "UserLocale": "en-US"
   },
   "ScreenOrder": [
-    "Screen1"
+    "Create",
+    "Retrieve",
+    "View in detail"
   ]
 }
