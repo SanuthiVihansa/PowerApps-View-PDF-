@@ -9,6 +9,69 @@
         Y: =40
         ZIndex: =1
 
+        Attachments_DataCard2 As typedDataCard.attachmentsViewCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="{Attachments}"
+            Default: =ThisItem.Attachments
+            DisplayMode: =DisplayMode.View
+            DisplayName: =DataSourceInfo([@CRUD],DataSourceInfo.DisplayName,"{Attachments}")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =false
+            Update: =DataCardValue12.Attachments
+            Width: =213
+            X: =1
+            Y: =1
+            ZIndex: =1
+
+            DataCardKey12 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue12 As attachments:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                DisplayMode: =Parent.DisplayMode
+                IsInDataCard: =true
+                Items: =Parent.Default
+                PaddingBottom: =5
+                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                PaddingRight: =5
+                PaddingTop: =5
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey12.Y + DataCardKey12.Height + 5
+                ZIndex: =2
+
+            ErrorMessage7 As label:
+                AutoHeight: =true
+                Height: =10
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue12.Y + DataCardValue12.Height
+                ZIndex: =3
+
+            StarVisible7 As label:
+                Align: =Align.Center
+                Height: =DataCardKey12.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey12.Y
+                ZIndex: =4
+
         Title_DataCard2 As typedDataCard.textualViewCard:
             BorderStyle: =BorderStyle.Solid
             DataField: ="Title"
@@ -83,43 +146,6 @@
                 Y: =DataCardKey8.Y + DataCardKey8.Height + 5
                 ZIndex: =2
 
-        "'Birth Date_DataCard2' As typedDataCard.textualViewCard":
-            BorderStyle: =BorderStyle.Solid
-            DataField: ="BirthDate"
-            Default: =ThisItem.'Birth Date'
-            DisplayMode: =DisplayMode.View
-            DisplayName: =DataSourceInfo([@CRUD],DataSourceInfo.DisplayName,"BirthDate")
-            Fill: =RGBA(0, 0, 0, 0)
-            Height: =40
-            Required: =false
-            Width: =213
-            X: =2
-            Y: =0
-            ZIndex: =2
-
-            DataCardKey9 As label:
-                AutoHeight: =true
-                Height: =34
-                Text: =Parent.DisplayName
-                Width: =Parent.Width - 60
-                Wrap: =false
-                X: =30
-                Y: =10
-                ZIndex: =1
-
-            DataCardValue9 As label:
-                AutoHeight: =true
-                DisplayMode: =Parent.DisplayMode
-                Height: =27
-                PaddingLeft: =0
-                PaddingRight: =0
-                PaddingTop: =0
-                Text: =Parent.Default
-                Width: =Parent.Width - 60
-                X: =30
-                Y: =DataCardKey9.Y + DataCardKey9.Height + 5
-                ZIndex: =2
-
         Address_DataCard2 As typedDataCard.textualViewCard:
             BorderStyle: =BorderStyle.Solid
             DataField: ="Address"
@@ -130,8 +156,8 @@
             Height: =40
             Required: =false
             Width: =213
-            X: =0
-            Y: =1
+            X: =2
+            Y: =0
             ZIndex: =2
 
             DataCardKey10 As label:
@@ -167,7 +193,7 @@
             Height: =40
             Required: =false
             Width: =213
-            X: =1
+            X: =0
             Y: =1
             ZIndex: =2
 
@@ -193,4 +219,54 @@
                 X: =30
                 Y: =DataCardKey11.Y + DataCardKey11.Height + 5
                 ZIndex: =2
+
+    "Gallery2 As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver4.0'":
+        DelayItemLoading: =true
+        Height: =597
+        Items: =Gallery1.Selected.Attachments
+        LoadingSpinner: =LoadingSpinner.Data
+        TemplatePadding: =0
+        TemplateSize: =640
+        X: =726
+        Y: =17
+        ZIndex: =2
+
+        Image2 As image:
+            Height: =411
+            Image: =ThisItem.AbsoluteUri
+            ImageRotation: =locRotate
+            OnSelect: =Select(Parent)
+            Width: =605
+            X: =17
+            Y: =98
+            ZIndex: =1
+
+        Title2 As label:
+            Align: =Align.Center
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: =ThisItem.DisplayName
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - 64
+            X: =32
+            Y: =527
+            ZIndex: =2
+
+        Icon1 As icon.Reset:
+            Icon: =Icon.Reset
+            OnSelect: |-
+                =Switch(locRotate,
+                       ImageRotation.None, UpdateContext({locRotate:ImageRotation.Rotate90}),
+                       ImageRotation.Rotate90, UpdateContext({locRotate:ImageRotation.Rotate180}),
+                       ImageRotation.Rotate180, UpdateContext({locRotate:ImageRotation.Rotate270}),
+                       ImageRotation.Rotate270, UpdateContext({locRotate:ImageRotation.None}),
+                       UpdateContext({locRotate:ImageRotation.None})
+                )
+            X: =544
+            Y: =34
+            ZIndex: =3
 
