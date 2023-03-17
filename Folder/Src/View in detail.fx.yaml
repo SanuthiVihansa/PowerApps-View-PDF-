@@ -3,6 +3,7 @@
     FormViewer1 As formViewer:
         DataSource: =CRUD
         Height: =687
+        Item: =Gallery1.Selected
         Width: =640
         X: =40
         Y: =40

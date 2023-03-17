@@ -410,3 +410,10 @@ Create As screen:
                 Y: =DataCardKey6.Y
                 ZIndex: =4
 
+    Button2 As button:
+        OnSelect: =SubmitForm(Add);NewForm(Add)
+        Text: ="Submit"
+        X: =80
+        Y: =578
+        ZIndex: =2
+
